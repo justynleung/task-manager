@@ -1,7 +1,7 @@
 interface Task {
     id: string;
     title: string;
-    date: string;
+    dueDate: string;
     category: string;
 }
 

@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import categories from "../categories";
@@ -30,7 +30,7 @@ export default function TaskForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm<TaskFormData>({
         resolver: zodResolver(taskFormData),
     });
@@ -40,9 +40,9 @@ export default function TaskForm() {
         const formatDate = e.dueDate.toLocaleDateString()
         // console.log(formatDate.toString())
         const newTask = { ...e, id: newId, dueDate: formatDate }
-        console.log(newTask)
-        const newTasksList = tasks.push(newTask)
-        console.log(newTasksList)
+        tasks.push(newTask)
+        setTasks(tasks)
+        console.log(tasks)
     }
     return (
         <>
