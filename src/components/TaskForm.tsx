@@ -1,40 +1,49 @@
-import { z } from "zod";
+import { string, z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import categories from "../categories";
-
+import Task from "../assets/task";
+import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 // Tailwindcss
 const inputClass = 'mx-4 my-2 rounded p-2'
 
-const taskFormData = z.object({
-    title: z.string()
-        .min(3, { message: "Must be 3 or more characters long" })
-        .max(50, { message: "Must be 50 or fewer characters long" }),
-    date: z.date({
-        required_error: "Please select a date and time",
-        invalid_type_error: "That's not a date!",
-    }),
-    category: z.enum(categories, {
-        required_error: "Please select a category",
-        invalid_type_error: "That's not a valid category!",
-    })
-})
-
-const {
-    register,
-    handleSubmit,
-    // formState: { errors, isSubmitting },
-} = useForm<TaskFormData>({
-    resolver: zodResolver(taskFormData),
-});
-
-const onSubmit: SubmitHandler<TaskFormData> = (data) => {
-    console.log(data);
-}
-
-type TaskFormData = z.infer<typeof taskFormData>
-
 export default function TaskForm() {
+    const [tasks, setTasks] = (useState<Task[]>([]))
+
+    const taskFormData = z.object({
+        title: z.string()
+            .min(3, { message: "Must be 3 or more characters long" })
+            .max(50, { message: "Must be 50 or fewer characters long" }),
+        dueDate: z.coerce.date()
+            .min(new Date("01/01/2023"), { message: "The past is gone" })
+            .max(new Date("01/01/2025"), { message: "Enter a date earlier than 01/01/2025" })
+        ,
+        category: z.enum(categories, {
+            required_error: "Please select a category",
+            invalid_type_error: "That's not a valid category!",
+        })
+    })
+
+    type TaskFormData = z.infer<typeof taskFormData>
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<TaskFormData>({
+        resolver: zodResolver(taskFormData),
+    });
+
+    const onSubmit: SubmitHandler<TaskFormData> = (e) => {
+        const newId = uuidv4().split('-').join('')
+        const formatDate = e.dueDate.toLocaleDateString()
+        // console.log(formatDate.toString())
+        const newTask = { ...e, id: newId, dueDate: formatDate }
+        console.log(newTask)
+        const newTasksList = tasks.push(newTask)
+        console.log(newTasksList)
+    }
     return (
         <>
             <section className='w-screen h-screen'>
@@ -47,23 +56,40 @@ export default function TaskForm() {
                         {...register('title')}
                         className={inputClass}
                     />
+                    {errors.title && (
+                        <p className="text-xs italic text-red-500 mt-2 mx-4"> {errors.title?.message}
+                        </p>
+                    )}
                     <label className='mx-4 mt-4' htmlFor="dueDate">Due date</label>
                     <input
-                        type="text"
+                        type="date"
                         id="dueDate"
-                        {...register('date')}
+                        {...register('dueDate')}
                         className={inputClass}
                     />
+                    {errors.dueDate && (
+                        <p className="text-xs italic text-red-500 mt-2 mx-4"> {errors.dueDate?.message}
+                        </p>
+                    )}
                     <label className='mx-4 mt-4' htmlFor="category">Category</label>
-                    <input
-                        type="text"
+                    <select
                         id="category"
                         {...register('category')}
-                        className={inputClass}
-                    />
+                        className={inputClass}>
+                        <option>Please Select</option>
+                        {categories.map((item) => {
+                            return (
+                                <option key={item} value={item}>{item}</option>
+                            )
+                        })}
+                    </select>
+                    {errors.category && (
+                        <p className="text-xs italic text-red-500 mt-2 mx-4"> {errors.category?.message}
+                        </p>
+                    )}
                     <button
                         type="submit"
-                        className=" text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
+                        className=" text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4">Submit</button>
                 </form>
             </section>
         </>

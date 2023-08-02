@@ -1,8 +1,8 @@
 interface Task {
-    id: number
-    title: string
-    dueDate: object
-    category: string
+    id: string;
+    title: string;
+    date: string;
+    category: string;
 }
 
 export default Task;
