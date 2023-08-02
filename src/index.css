@@ -28,7 +28,11 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+th {
+  border: 1px solid #dbe1e8;
+}
+
+/* body {
   margin: 0;
   display: flex;
   place-items: center;
@@ -39,7 +43,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
+} */
 
 button {
   border-radius: 8px;

@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -28,6 +31,7 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "nodemon": "^3.0.1",
     "postcss": "^8.4.27",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",

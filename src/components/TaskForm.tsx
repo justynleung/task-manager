@@ -1,16 +1,18 @@
+// Dependencies
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import categories from "../categories";
-import Task from "../assets/task";
-import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+// Asset
+import categories from "../categories";
 // Tailwindcss
 const inputClass = 'mx-4 my-2 rounded p-2'
+interface Props {
+    tasks: object[]
+    setTasks: Function
+}
 
-export default function TaskForm() {
-    const [tasks, setTasks] = (useState<Task[]>([]))
-
+export default function TaskForm({ tasks, setTasks }: Props) {
     const taskFormData = z.object({
         title: z.string()
             .min(3, { message: "Must be 3 or more characters long" })
@@ -43,10 +45,13 @@ export default function TaskForm() {
         tasks.push(newTask)
         setTasks(tasks)
         console.log(tasks)
+        tasks.map((item) => {
+            console.log(item)
+        })
     }
     return (
         <>
-            <section className='w-screen h-screen'>
+            <section>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-full h-full flex flex-col'>
                     <label className='mx-4 mt-4' htmlFor="title">Title</label>
                     <input
