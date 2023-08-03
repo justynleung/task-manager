@@ -42,17 +42,21 @@ export default function TaskList({ tasks, setTasks }: Props) {
                     <tr className="h-10">
                         <th>Title</th>
                         <th>Due Date</th>
-                        <th><select
-                            id="category"
-                            onChange={(e) => renderListOrFilteredList(e.target.value)}
-                        >
-                            <option value="Category">Category</option>
-                            {categories.map((item) => {
-                                return (
-                                    <option key={item} value={item}>{item}</option>
-                                )
-                            })}
-                        </select></th>
+                        <th className="relative">
+                            <select
+                                id="category"
+                                className="bg-transparent"
+                                onChange={(e) => renderListOrFilteredList(e.target.value)}
+                            >
+                                <option value="Category">Category</option>
+                                {categories.map((item) => {
+                                    return (
+                                        <option key={item} value={item}>{item}</option>
+                                    )
+                                })}
+                            </select>
+                            <small className="absolute left-0 right-0 mx-auto top-14 font-extrabold ">No Pending tasks</small>
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
