@@ -58,7 +58,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="relative w-full">
                     {applyFilter ? <TaskFilter tasks={tasks} setTasks={setTasks} filter={filter} /> :
                         tasksList}
                 </tbody>
