@@ -17,9 +17,10 @@ export default function TaskForm({ tasks, setTasks }: Props) {
         title: z.string()
             .min(3, { message: "Must be 3 or more characters long" })
             .max(50, { message: "Must be 50 or fewer characters long" }),
-        dueDate: z.coerce.date()
-            .min(new Date("01/01/2023"), { message: "The past is gone" })
-            .max(new Date("01/01/2025"), { message: "Enter a date earlier than 01/01/2025" })
+        dueDate: z.string()
+        // .min(new Date("01/01/2023"), { message: "The past is gone" })
+        // .max(new Date("01/01/2025"), { message: "Enter a date earlier than 01/01/2025" })
+
         ,
         category: z.enum(categories, {
             required_error: "Please select a category",
@@ -39,9 +40,8 @@ export default function TaskForm({ tasks, setTasks }: Props) {
 
     const onSubmit: SubmitHandler<TaskFormData> = (e) => {
         const newId = uuidv4().split('-').join('')
-        const formatDate = e.dueDate.toLocaleDateString()
         const newList = [...tasks]
-        newList.push({ ...e, id: newId, dueDate: formatDate })
+        newList.push({ ...e, id: newId, dueDate: e.dueDate })
         setTasks(newList)
 
     }
