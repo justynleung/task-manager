@@ -79,7 +79,7 @@ export default function TaskForm({ tasks, setTasks }: Props) {
                         {...register('category')}
                         className={inputClass}>
                         <option>Please Select</option>
-                        {categories.map((item) => {
+                        {categories && categories.map((item) => {
                             return (
                                 <option key={item} value={item}>{item}</option>
                             )
@@ -92,7 +92,7 @@ export default function TaskForm({ tasks, setTasks }: Props) {
                     <button
                         type="submit"
                         className=" text-white bg-primary-600 hover:bg-emerald-500 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4 focus:outline-lime-500">Submit</button>
-                    <div className={`flex justify-center items-center h-6 w-full font-bold ${tasks.length === 0 && tasks.length !== null ? "text-orange-500" : "text-transparent"}`}><p>No Pending Tasks!</p></div>
+                    <div className={`flex justify-center items-center h-6 w-full font-bold ${tasks && tasks.length === 0 ? "text-orange-500" : "text-transparent"}`}><p>No Pending Tasks!</p></div>
                 </form>
             </section>
         </>

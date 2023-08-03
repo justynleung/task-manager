@@ -23,7 +23,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
         setTasks(updatedList)
     }
 
-    const tasksList = tasks.map((item, i) => {
+    const tasksList = tasks && tasks.map((item, i) => {
         if (tasks) {
             return (
                 <tr key={i} className="h-10">
@@ -49,7 +49,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
                                 onChange={(e) => renderListOrFilteredList(e.target.value)}
                             >
                                 <option value="Category">Category</option>
-                                {categories.map((item) => {
+                                {categories && categories.map((item) => {
                                     return (
                                         <option key={item} value={item}>{item}</option>
                                     )

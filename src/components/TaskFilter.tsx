@@ -7,12 +7,12 @@ interface Props {
 }
 
 export default function TaskFilter({ tasks, setTasks, filter }: Props) {
-    const filteredTasks = tasks.filter((item) => item.category === filter)
+    const filteredTasks = [...tasks].filter((item) => item.category === filter)
     const removeItem = (id: string) => {
         const updatedList = tasks.filter((item) => id !== item.id)
         setTasks(updatedList)
     }
-    const tasksList = filteredTasks.map((item, i) => {
+    const tasksList = filteredTasks && filteredTasks.map((item, i) => {
         if (filteredTasks) {
             return (
                 <tr key={i} className="h-10">
@@ -27,7 +27,7 @@ export default function TaskFilter({ tasks, setTasks, filter }: Props) {
     })
     return (
         <>
-            {tasks.length !== 0 || null && filter !== "Category" && filteredTasks.length === 0 && filteredTasks.length !== null ? <tr><td><small className='absolute w-fit left-0 right-0 mx-auto font-bold text-base bottom-14 text-orange-500'>No task in this cetegory. Select "Category" to see all tasks.</small></td></tr> : null}
+            {tasks && tasks.length !== 0 && filter !== "Category" && filteredTasks && filteredTasks.length === 0 ? <tr><td><small className='absolute w-fit left-0 right-0 mx-auto font-bold text-base bottom-14 text-orange-500'>No task in this cetegory. Select "Category" to see all tasks.</small></td></tr> : null}
             {tasksList}
         </>
     )
