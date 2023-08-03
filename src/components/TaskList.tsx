@@ -9,16 +9,13 @@ interface Props {
 
 export default function TaskList({ tasks, setTasks }: Props) {
     const [applyFilter, setApplyFilter] = useState(false)
-    const [filteredTasks, setFilteredTasks] = (useState<Task[]>([]))
+    const [filter, setFilter] = useState("")
     const renderListOrFilteredList = (value: string) => {
         if (value === "Category") {
             setApplyFilter(false)
-            setFilteredTasks([{ id: '', title: '', dueDate: '', category: '' }])
-            console.log('equal to category')
         } else {
             setApplyFilter(true)
-            const filtered = tasks.filter((item) => item.category === value)
-            setFilteredTasks(filtered)
+            setFilter(value)
         }
     }
     const removeItem = (id: string) => {
@@ -56,13 +53,13 @@ export default function TaskList({ tasks, setTasks }: Props) {
                                     )
                                 })}
                             </select>
-                            <small className={`absolute left-0 right-0 mx-auto top-14 font-extrabold ${filteredTasks.length === 0 && tasks.length !== 0 ? "text-orange-500" : "text-transparent"}`}>No Pending tasks</small>
+                            {/* <small className={`absolute left-0 right-0 mx-auto top-14 font-extrabold ${filteredTasks.length === 0 && tasks.length !== 0 ? "text-orange-500" : "text-transparent"}`}>No Pending tasks</small> */}
                         </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {applyFilter ? <TaskFilter tasks={tasks} setTasks={setTasks} filteredTasks={filteredTasks} /> :
+                    {applyFilter ? <TaskFilter tasks={tasks} setTasks={setTasks} filter={filter} /> :
                         tasksList}
                 </tbody>
             </table>
