@@ -45,9 +45,6 @@ export default function TaskForm({ tasks, setTasks }: Props) {
         tasks.push(newTask)
         setTasks(tasks)
         console.log(tasks)
-        tasks.map((item) => {
-            console.log(item)
-        })
     }
     return (
         <>

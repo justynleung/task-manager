@@ -11,7 +11,7 @@ export default function TaskList({ tasks }: Props) {
                 <th>{item.title}</th>
                 <th>{item.dueDate}</th>
                 <th>{item.category}</th>
-                <th><button></button></th>
+                <th><DeleteBtn /></th>
             </tr>
         )
     })
@@ -30,7 +30,15 @@ export default function TaskList({ tasks }: Props) {
                     {tasksList}
                 </tbody>
             </table>
-
         </div >
+    )
+}
+
+
+const DeleteBtn = () => {
+    return (
+        <>
+            <button className="">Delete</button>
+        </>
     )
 }

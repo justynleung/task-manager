@@ -6,14 +6,12 @@ import TaskForm from './components/TaskForm';
 import { useState } from 'react';
 
 
-function App() {
+export default function App() {
   const [tasks, setTasks] = (useState<Task[]>([]))
   return (
     <main className="w-screen h-min">
-      <TaskForm tasks={tasks} setTasks={() => setTasks} />
+      <TaskForm tasks={tasks} setTasks={setTasks} />
       <TaskList tasks={tasks} />
     </main>
   )
 }
-
-export default App;
