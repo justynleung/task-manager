@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Task from "../assets/task"
-import categories from "../categories"
+import categories from "../assets/categories"
 import TaskFilter from "./TaskFilter"
 interface Props {
     tasks: Task[]

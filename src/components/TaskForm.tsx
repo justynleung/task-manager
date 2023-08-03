@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from 'uuid';
 // Asset
-import categories from "../categories";
+import categories from "../assets/categories";
 // Tailwindcss
 const inputClass = 'mx-4 my-2 rounded p-2'
 interface Props {
