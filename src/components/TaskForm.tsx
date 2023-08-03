@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from 'uuid';
 // Asset
 import categories from "../categories";
+import Task from "../assets/task";
 // Tailwindcss
-const inputClass = 'mx-4 my-2 rounded p-2'
+const inputClass = 'mx-4 my-2 rounded p-2';
+
 interface Props {
-    tasks: object[]
+    tasks: Task[]
     setTasks: Function
 }
 
@@ -40,11 +42,8 @@ export default function TaskForm({ tasks, setTasks }: Props) {
     const onSubmit: SubmitHandler<TaskFormData> = (e) => {
         const newId = uuidv4().split('-').join('')
         const formatDate = e.dueDate.toLocaleDateString()
-        // console.log(formatDate.toString())
-        const newTask = { ...e, id: newId, dueDate: formatDate }
-        tasks.push(newTask)
-        setTasks(tasks)
-        console.log(tasks)
+        const newList = [...tasks, { ...e, id: newId, dueDate: formatDate }]
+        setTasks(newList)
     }
     return (
         <>
@@ -91,7 +90,7 @@ export default function TaskForm({ tasks, setTasks }: Props) {
                     )}
                     <button
                         type="submit"
-                        className=" text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4">Submit</button>
+                        className="text-white focus:ring-4 focus:outline-none focus:ring-primary-300 hover:bg-emerald-500 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4">Submit</button>
                 </form>
             </section>
         </>

@@ -11,7 +11,7 @@ export default function App() {
   return (
     <main className="w-screen h-min">
       <TaskForm tasks={tasks} setTasks={setTasks} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} setTasks={setTasks} />
     </main>
   )
 }
