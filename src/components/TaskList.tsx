@@ -24,14 +24,16 @@ export default function TaskList({ tasks, setTasks }: Props) {
     }
 
     const tasksList = tasks.map((item, i) => {
-        return (
-            <tr key={i} className="h-10">
-                <th>{item.title}</th>
-                <th>{item.dueDate}</th>
-                <th>{item.category}</th>
-                <th><button onClick={() => removeItem(item.id)}>Delete</button></th>
-            </tr>
-        )
+        if (tasks) {
+            return (
+                <tr key={i} className="h-10">
+                    <th>{item.title}</th>
+                    <th>{item.dueDate}</th>
+                    <th>{item.category}</th>
+                    <th><button onClick={() => removeItem(item.id)}>Delete</button></th>
+                </tr>
+            )
+        }
     })
     return (
         <div className="flex justify-center mb-20">
