@@ -1,11 +1,25 @@
+import { useState } from "react"
 import Task from "../assets/task"
-
+import categories from "../categories"
+import TaskFilter from "./TaskFilter"
 interface Props {
     tasks: Task[]
     setTasks: Function
 }
 
 export default function TaskList({ tasks, setTasks }: Props) {
+    const [applyFilter, setApplyFilter] = useState(false)
+    const [filter, setFilter] = useState("")
+    const renderListOrFilteredList = (value: string) => {
+        if (value === "Category") {
+            setApplyFilter(false)
+            console.log('equal to category')
+        } else {
+            setApplyFilter(true)
+            setFilter(value)
+            console.log(value)
+        }
+    }
     const removeItem = (id: string) => {
         const updatedList = tasks.filter((item) => id !== item.id)
         setTasks(updatedList)
@@ -28,12 +42,23 @@ export default function TaskList({ tasks, setTasks }: Props) {
                     <tr className="h-10">
                         <th>Title</th>
                         <th>Due Date</th>
-                        <th>Category</th>
+                        <th><select
+                            id="category"
+                            onChange={(e) => renderListOrFilteredList(e.target.value)}
+                        >
+                            <option value="Category">Category</option>
+                            {categories.map((item) => {
+                                return (
+                                    <option key={item} value={item}>{item}</option>
+                                )
+                            })}
+                        </select></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {tasksList}
+                    {applyFilter ? <TaskFilter tasks={tasks} setTasks={setTasks} filter={filter} /> :
+                        tasksList}
                 </tbody>
             </table>
         </div >
