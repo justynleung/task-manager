@@ -3,11 +3,10 @@ import Task from '../assets/task'
 interface Props {
     tasks: Task[]
     setTasks: Function
-    filter: string
+    filteredTasks: Task[]
 }
 
-export default function TaskFilter({ tasks, setTasks, filter }: Props) {
-    const filteredTasks = tasks.filter((item) => item.category === filter)
+export default function TaskFilter({ tasks, setTasks, filteredTasks }: Props) {
     const removeItem = (id: string) => {
         const updatedList = tasks.filter((item) => id !== item.id)
         setTasks(updatedList)
