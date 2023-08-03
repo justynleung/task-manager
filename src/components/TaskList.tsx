@@ -34,7 +34,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
         )
     })
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-20">
             <table className="w-full mx-4 mt-4 border-collapse">
                 <thead>
                     <tr className="h-10">
