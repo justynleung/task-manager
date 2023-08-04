@@ -42,10 +42,9 @@ export default function TaskForm({ tasks, setTasks }: Props) {
         if (e) {
             const newId = uuidv4().split('-').join('')
             const newList = [...tasks]
-            newList.push({ ...e, id: newId, dueDate: e.dueDate })
+            newList.push({ title: e.title, category: e.category, id: newId, dueDate: e.dueDate })
             setTasks(newList)
         }
-        //dec 16 friday 2pm dr eugene ma
     }
     return (
         <>
