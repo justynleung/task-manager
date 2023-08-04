@@ -6,9 +6,11 @@ import TaskForm from './components/TaskForm';
 import { useState, useEffect } from 'react';
 
 export default function App() {
+  // Set to empty array if local storage return null
   const [tasks, setTasks] = (useState<Task[]>(() => {
     return JSON.parse(localStorage.getItem('tasks')!) || []
   }));
+  // Save to local storage everytime tasks is updated - useEffect
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);

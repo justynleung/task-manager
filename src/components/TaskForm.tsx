@@ -13,26 +13,26 @@ interface Props {
 }
 
 export default function TaskForm({ tasks, setTasks }: Props) {
+    // Zod basic schema
     const taskFormData = z.object({
         title: z.string()
             .min(3, { message: "Must be 3 or more characters long" })
             .max(50, { message: "Must be 50 or fewer characters long" }),
-        dueDate: z.string()
+        dueDate: z.string(),
         // .min(new Date("01/01/2023"), { message: "The past is gone" })
         // .max(new Date("01/01/2025"), { message: "Enter a date earlier than 01/01/2025" })
-
-        ,
         category: z.enum(categories, {
             required_error: "Please select a category",
             invalid_type_error: "That's not a valid category!",
         })
     })
-
+    // Zod object schema
     type TaskFormData = z.infer<typeof taskFormData>
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<TaskFormData>({
         resolver: zodResolver(taskFormData),
@@ -41,9 +41,9 @@ export default function TaskForm({ tasks, setTasks }: Props) {
     const onSubmit: SubmitHandler<TaskFormData> = (d) => {
         const newId = uuidv4().split('-').join('')
         const newList = [...tasks]
-        console.log(newList)
         newList.push({ ...d, id: newId, dueDate: d.dueDate })
         setTasks(newList)
+        reset
     }
     return (
         <>
@@ -92,7 +92,7 @@ export default function TaskForm({ tasks, setTasks }: Props) {
                     <button
                         type="submit"
                         className=" text-white bg-primary-600 hover:bg-emerald-500 font-medium rounded-lg text-lg px-5 py-2.5 mx-4 mt-4 focus:outline-lime-500">Submit</button>
-                    <div className={`flex justify-center items-center h-6 w-full font-bold ${tasks && tasks.length === 0 ? "text-orange-500" : "text-transparent"}`}><p>No Pending Tasks!</p></div>
+                    <div className={`flex justify-center items-center h-6 w-full font-bold ${tasks.length === 0 ? "text-orange-500" : "text-transparent"}`}><p>No Pending Tasks!</p></div>
                 </form>
             </section>
         </>

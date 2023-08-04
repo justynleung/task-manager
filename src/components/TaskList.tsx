@@ -8,9 +8,12 @@ interface Props {
 }
 
 export default function TaskList({ tasks, setTasks }: Props) {
+    // State for conditional render filtered list or unfiltered list
     const [applyFilter, setApplyFilter] = useState(false)
+    // State for passing requied filter to TaskFilter
     const [filter, setFilter] = useState("")
     const renderListOrFilteredList = (value: string) => {
+        // Render taskList if no filter applied, otherwise render TaskFilter
         if (value === "Category") {
             setApplyFilter(false)
         } else {

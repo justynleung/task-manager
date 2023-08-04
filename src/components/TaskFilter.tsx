@@ -9,7 +9,7 @@ interface Props {
 export default function TaskFilter({ tasks, setTasks, filter }: Props) {
     let filteredTasks = tasks.filter((item) => item.category === filter)
     const removeItem = (id: string) => {
-        const updatedList = tasks && tasks.filter((item) => id !== item.id)
+        const updatedList = tasks.filter((item) => id !== item.id)
         setTasks(updatedList)
     }
     const tasksList = filteredTasks.map((item, i) => {
@@ -25,7 +25,7 @@ export default function TaskFilter({ tasks, setTasks, filter }: Props) {
     })
     return (
         <>
-            {tasks && tasks.length !== 0 && filter !== "Category" && filteredTasks && filteredTasks.length === 0 ? <tr><td><small className='absolute w-fit left-0 right-0 mx-auto font-bold text-base bottom-14 text-orange-500'>No task in this cetegory. Select "Category" to see all tasks.</small></td></tr> : null}
+            {tasks.length !== 0 && filter !== "Category" && filteredTasks.length === 0 ? <tr><td><small className='absolute w-fit left-0 right-0 mx-auto font-bold text-base bottom-14 text-orange-500'>No task in this cetegory. Select "Category" to see all tasks.</small></td></tr> : null}
             {tasksList}
         </>
     )
