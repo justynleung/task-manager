@@ -38,11 +38,11 @@ export default function TaskForm({ tasks, setTasks }: Props) {
         resolver: zodResolver(taskFormData),
     });
 
-    const onSubmit: SubmitHandler<TaskFormData> = (e) => {
-        if (e) {
+    const onSubmit: SubmitHandler<TaskFormData> = (d) => {
+        if (d) {
             const newId = uuidv4().split('-').join('')
             const newList = [...tasks]
-            newList.push({ title: e.title, category: e.category, id: newId, dueDate: e.dueDate })
+            newList.push({ title: d.title, category: d.category, id: newId, dueDate: d.dueDate })
             setTasks(newList)
         }
     }

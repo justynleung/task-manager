@@ -46,7 +46,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
                             <select
                                 id="category"
                                 className="bg-transparent"
-                                onChange={(e) => renderListOrFilteredList(e.target.value)}
+                                onChange={(input) => renderListOrFilteredList(input.target.value)}
                             >
                                 <option value="Category">Category</option>
                                 {categories && categories.map((item) => {
