@@ -23,7 +23,7 @@ export default function TaskList({ tasks, setTasks }: Props) {
         setTasks(updatedList)
     }
 
-    const tasksList = tasks && tasks.map((item, i) => {
+    const tasksList = tasks.map((item, i) => {
         if (tasks) {
             return (
                 <tr key={i} className="h-10">
@@ -49,13 +49,12 @@ export default function TaskList({ tasks, setTasks }: Props) {
                                 onChange={(input) => renderListOrFilteredList(input.target.value)}
                             >
                                 <option value="Category">Category</option>
-                                {categories && categories.map((item) => {
+                                {categories.map((item) => {
                                     return (
                                         <option key={item} value={item}>{item}</option>
                                     )
                                 })}
                             </select>
-                            {/* <small className={`absolute left-0 right-0 mx-auto top-14 font-extrabold ${filteredTasks.length === 0 && tasks.length !== 0 ? "text-orange-500" : "text-transparent"}`}>No Pending tasks</small> */}
                         </th>
                         <th></th>
                     </tr>
