@@ -43,7 +43,7 @@ export default function TaskForm({ tasks, setTasks }: Props) {
         const newList = [...tasks]
         newList.push({ ...d, id: newId, dueDate: d.dueDate })
         setTasks(newList)
-        reset
+        reset()
     }
     return (
         <>
