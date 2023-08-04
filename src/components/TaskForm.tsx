@@ -39,12 +39,11 @@ export default function TaskForm({ tasks, setTasks }: Props) {
     });
 
     const onSubmit: SubmitHandler<TaskFormData> = (d) => {
-        if (d) {
-            const newId = uuidv4().split('-').join('')
-            const newList = [...tasks]
-            newList.push({ title: d.title, category: d.category, id: newId, dueDate: d.dueDate })
-            setTasks(newList)
-        }
+        const newId = uuidv4().split('-').join('')
+        const newList = [...tasks]
+        console.log(newList)
+        newList.push({ ...d, id: newId, dueDate: d.dueDate })
+        setTasks(newList)
     }
     return (
         <>

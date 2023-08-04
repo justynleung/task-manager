@@ -7,23 +7,21 @@ interface Props {
 }
 
 export default function TaskFilter({ tasks, setTasks, filter }: Props) {
-    const filteredTasks = tasks && [...tasks].filter((item) => item.category === filter)
+    let filteredTasks = tasks.filter((item) => item.category === filter)
     const removeItem = (id: string) => {
         const updatedList = tasks && tasks.filter((item) => id !== item.id)
         setTasks(updatedList)
     }
-    const tasksList = filteredTasks && filteredTasks.map((item, i) => {
-        if (filteredTasks) {
-            return (
-                <tr key={i} className="h-10">
-                    <th>{item.title}</th>
-                    <th>{item.dueDate}</th>
-                    <th>{item.category}</th>
-                    {/* add delete function later */}
-                    <th><button onClick={() => removeItem(item.id)}>Delete</button></th>
-                </tr>
-            )
-        }
+    const tasksList = filteredTasks.map((item, i) => {
+        return (
+            <tr key={i} className="h-10">
+                <th>{item.title}</th>
+                <th>{item.dueDate}</th>
+                <th>{item.category}</th>
+                {/* add delete function later */}
+                <th><button onClick={() => removeItem(item.id)}>Delete</button></th>
+            </tr>
+        )
     })
     return (
         <>
